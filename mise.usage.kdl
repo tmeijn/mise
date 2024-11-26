@@ -505,13 +505,15 @@ in the current directory to activate this tool when inside the directory.
 Alternatively, run `mise exec <TOOL>@<VERSION> -- <COMMAND>` to execute a tool without creating config files.
 
 Tools will be installed in parallel. To disable, set `--jobs=1` or `MISE_JOBS=1`"
-    after_long_help r"Examples:
+    after_long_help r#"Examples:
 
     $ mise install node@20.0.0  # install specific node version
     $ mise install node@20      # install fuzzy node version
     $ mise install node         # install version specified in mise.toml
     $ mise install              # installs everything specified in mise.toml
-"
+    $ mise install -f node@20   # reinstall node@20
+    $ mise install -f "gem:*"   # reinstall all gems
+"#
     flag "-f --force" help="Force reinstall even if already installed"
     flag "-j --jobs" help="Number of jobs to run in parallel\n[default: 4]" {
         arg "<JOBS>"

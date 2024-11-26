@@ -92,32 +92,43 @@ impl Install {
         for ta in ToolArg::double_tool_condition(runtimes)? {
             match ta.tvr {
                 // user provided an explicit version
-                Some(tv) => requests.push(tv),
-                None => {
-                    if ta.tvr.is_none() {
-                        match ts.versions.get(&ta.ba) {
-                            // the tool is in config so fetch the params from config
-                            // this may match multiple versions of one tool (e.g.: python)
-                            Some(tvl) => {
-                                for tvr in &tvl.requests {
-                                    requests.push(tvr.clone());
-                                }
-                            }
-                            // in this case the user specified a tool which is not in config
-                            // so we default to @latest with no options
-                            None => {
-                                let tvr = ToolRequest::Version {
-                                    backend: ta.ba.clone(),
-                                    version: "latest".into(),
-                                    os: None,
-                                    options: ta.ba.opts(),
-                                    source: ToolSource::Argument,
-                                };
-                                requests.push(tvr);
-                            }
+                Some(tv) => {
+                    requests.push(tv);
+                }
+                None => match ts.versions.get(&ta.ba) {
+                    // the tool is in config so fetch the params from config
+                    // this may match multiple versions of one tool (e.g.: python)
+                    Some(tvl) => {
+                        for tvr in &tvl.requests {
+                            requests.push(tvr.clone());
                         }
                     }
-                }
+                    // in this case the user specified a tool which is not in config
+                    // so we default to @latest with no options
+                    None => {
+                        if let Some(filter) = ta.ba.full().strip_suffix('*') {
+                            let versions = ts
+                                .list_installed_versions()?
+                                .into_iter()
+                                .chain(ts.list_current_versions())
+                                .map(|(_ba, tv)| tv)
+                                .unique()
+                                .filter(|tv| tv.ba().full().starts_with(filter))
+                                .map(|tv| tv.request)
+                                .collect_vec();
+                            requests.extend(versions);
+                        } else {
+                            let tvr = ToolRequest::Version {
+                                backend: ta.ba.clone(),
+                                version: "latest".into(),
+                                os: None,
+                                options: ta.ba.opts(),
+                                source: ToolSource::Argument,
+                            };
+                            requests.push(tvr);
+                        }
+                    }
+                },
             }
         }
         Ok(requests)
@@ -146,6 +157,8 @@ static AFTER_LONG_HELP: &str = color_print::cstr!(
     $ <bold>mise install node@20</bold>      # install fuzzy node version
     $ <bold>mise install node</bold>         # install version specified in mise.toml
     $ <bold>mise install</bold>              # installs everything specified in mise.toml
+    $ <bold>mise install -f node@20</bold>   # reinstall node@20
+    $ <bold>mise install -f "gem:*"</bold>   # reinstall all gems
 "#
 );
 

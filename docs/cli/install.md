@@ -47,3 +47,5 @@ Examples:
     mise install node@20      # install fuzzy node version
     mise install node         # install version specified in mise.toml
     mise install              # installs everything specified in mise.toml
+    mise install -f node@20   # reinstall node@20
+    mise install -f "gem:*"   # reinstall all gems
