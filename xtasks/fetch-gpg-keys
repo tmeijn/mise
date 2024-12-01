@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+FINGERPRINTS=(
+  "C0D6248439F1D5604AAFFB4021D900FFDB233756" # node
+)
+
+for fingerprint in "${FINGERPRINTS[@]}"; do
+  curl "https://keys.openpgp.org/vks/v1/by-fingerprint/$fingerprint.asc" > src/assets/gpg/$fingerprint
+done

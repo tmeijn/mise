@@ -11,7 +11,7 @@ pub use std::env::*;
 use std::path::PathBuf;
 use std::string::ToString;
 use std::sync::RwLock;
-use std::{path, process};
+use std::{env, path, process};
 
 pub static ARGS: RwLock<Vec<String>> = RwLock::new(vec![]);
 #[cfg(unix)]
@@ -123,6 +123,8 @@ pub static ARGV0: Lazy<String> = Lazy::new(|| ARGS.read().unwrap()[0].to_string(
 pub static MISE_BIN_NAME: Lazy<&str> = Lazy::new(|| filename(&ARGV0));
 pub static MISE_LOG_FILE: Lazy<Option<PathBuf>> = Lazy::new(|| var_path("MISE_LOG_FILE"));
 pub static MISE_LOG_FILE_LEVEL: Lazy<Option<LevelFilter>> = Lazy::new(log_file_level);
+
+pub static HTTP_PROXY: Lazy<Option<String>> = Lazy::new(|| var("https_proxy").or_else(|_| var("http_proxy")).ok());
 
 pub static __USAGE: Lazy<Option<String>> = Lazy::new(|| var("__USAGE").ok());
 

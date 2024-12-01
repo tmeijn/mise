@@ -71,6 +71,7 @@ mod watch_files;
 
 pub(crate) use crate::exit::exit;
 pub(crate) use crate::toolset::install_state;
+pub(crate) use crate::result::Result;
 use crate::ui::multi_progress_report::MultiProgressReport;
 
 fn main() -> eyre::Result<()> {

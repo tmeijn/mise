@@ -1,4 +1,4 @@
-use std::env;
+use crate::env;
 use std::fmt::Debug;
 use std::path::{Path, PathBuf};
 
@@ -262,7 +262,7 @@ impl Git {
 
 fn get_fetch_options() -> Result<git2::FetchOptions<'static>> {
     let mut fetch_options = FetchOptions::new();
-    if let Ok(proxy_url) = env::var("https_proxy").or_else(|_| env::var("http_proxy")) {
+    if let Ok(proxy_url) = env::HTTP_PROXY {
         let mut proxy_options = ProxyOptions::new();
         proxy_options.url(&proxy_url);
         fetch_options.proxy_options(proxy_options);
