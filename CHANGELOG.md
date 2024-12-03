@@ -1,5 +1,41 @@
 # Changelog
 
+## [2024.12.0](https://github.com/jdx/mise/compare/v2024.11.37..v2024.12.0) - 2024-12-03
+
+### 🚀 Features
+
+- add upctl by [@scop](https://github.com/scop) in [#3309](https://github.com/jdx/mise/pull/3309)
+- Add `json-with-sources` option to settings ls by [@hverlin](https://github.com/hverlin) in [#3307](https://github.com/jdx/mise/pull/3307)
+
+### 🐛 Bug Fixes
+
+- add exec to `mise g git-pre-commit` by [@jdx](https://github.com/jdx) in [27a3aef](https://github.com/jdx/mise/commit/27a3aefa767c8ef142009dd54c4d7dcc19c235b2)
+
+### 🚜 Refactor
+
+- use aqua for ruff by [@scop](https://github.com/scop) in [#3316](https://github.com/jdx/mise/pull/3316)
+
+### 📚 Documentation
+
+- add terraform recipe to the cookbook by [@AliSajid](https://github.com/AliSajid) in [#3305](https://github.com/jdx/mise/pull/3305)
+
+### 🧪 Testing
+
+- remove non-working maven test by [@jdx](https://github.com/jdx) in [5a3ed16](https://github.com/jdx/mise/commit/5a3ed16efb29dbf80f5ac251eec39e3a462d2219)
+
+### 🔍 Other Changes
+
+- Update tips-and-tricks.md by [@jdx](https://github.com/jdx) in [5071419](https://github.com/jdx/mise/commit/5071419b988d3655b87e7413a4577fab2684ddf8)
+- Update tips-and-tricks.md by [@jdx](https://github.com/jdx) in [fcc6b59](https://github.com/jdx/mise/commit/fcc6b59740306ee2065f365d230b30abbefcc7d2)
+- Update tips-and-tricks.md by [@jdx](https://github.com/jdx) in [039b19d](https://github.com/jdx/mise/commit/039b19dd9dc68e3047b23127483af2f9efd11e1b)
+- Update configuration.md by [@jdx](https://github.com/jdx) in [b0cac9e](https://github.com/jdx/mise/commit/b0cac9e7573ccb5dd70c3b3b1e53a0a7911c2e18)
+- Update tips-and-tricks.md by [@jdx](https://github.com/jdx) in [9347be8](https://github.com/jdx/mise/commit/9347be89a9a86c0bde40c3986c01b98e4f8d68b8)
+- Update tips-and-tricks.md by [@jdx](https://github.com/jdx) in [1cfc822](https://github.com/jdx/mise/commit/1cfc8228541c98111c36c5470323f9fe52d2125f)
+
+### New Contributors
+
+- @AliSajid made their first contribution in [#3305](https://github.com/jdx/mise/pull/3305)
+
 ## [2024.11.37](https://github.com/jdx/mise/compare/v2024.11.36..v2024.11.37) - 2024-11-30
 
 ### 🚀 Features
